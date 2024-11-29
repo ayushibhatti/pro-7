@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #333;
+        }
+
+        .action-btns a {
+            margin: 0 5px;
+        }
+
+        .add-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .add-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>View User</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Book Name</th>
+                    <th>Book Price</th>
+                    <th>Book Pages</th>
+                    <th>Book Author</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% record.map((val,i) => { 
+                    const { id, book_name, book_price, book_pages, book_author } = val; 
+                %>
+                <tr>
+                    <td><%= ++i %></td>
+                    <td><%= book_name %></td>
+                    <td><%= book_price %></td>
+                    <td><%= book_pages %></td>
+                    <td><%= book_author %></td>
+                    <td class="action-btns">
+                        <a href="/deleterecord?deleteid=<%= id %>">Delete</a> ||
+                        <a href="/editrecord?editid=<%= id %>">Edit</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a href="/add" class="add-btn">Add New Book</a>
+    </div>
+</body>
+
+</html>

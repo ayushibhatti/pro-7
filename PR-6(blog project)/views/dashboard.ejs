@@ -1,0 +1,213 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../uploads/shopping-online.png" type="image/x-icon">
+        <title>Shopping Products - Admin Panel</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {
+                background: #f8f9fa;
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            .header {
+                background-color: #17a2b8;
+                color: #fff;
+                padding: 15px 20px;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            .header h1 {
+                margin: 0;
+                font-size: 1.8rem;
+                display: inline-block;
+            }
+
+            .header .user-actions {
+                float: right;
+            }
+
+            .user-actions a {
+                color: #fff;
+                margin-left: 15px;
+                text-decoration: none;
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+
+            .user-actions a:hover {
+                color: #ffc107;
+            }
+
+            .product-card {
+                background: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .product-card img {
+                width: 100%;
+                height: auto;
+            }
+
+            .product-card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .product-title {
+                padding: 15px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                text-align: center;
+                color: #17a2b8;
+            }
+
+            .carousel-inner img {
+                border-radius: 10px;
+            }
+
+            .carousel-item img {
+                max-height: 660px;
+                object-fit: cover;
+                margin: auto;
+            }
+
+            .btn-primary {
+                background-color: #17a2b8;
+                border: none;
+            }
+
+            .btn-primary:hover {
+                background-color: #138496;
+            }
+
+            .btn-add {
+                margin-bottom: 20px;
+                background-color: #28a745;
+                color: #fff;
+            }
+
+            .btn-add:hover {
+                background-color: #218838;
+            }
+
+            .sidebar {
+                height: 100vh;
+                background-color: #17a2b8;
+                color: #fff;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 240px;
+                padding-top: 20px;
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .sidebar a {
+                display: flex;
+                align-items: center;
+                padding: 15px 20px;
+                color: #fff;
+                text-decoration: none;
+                font-size: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .sidebar a i {
+                margin-right: 10px;
+                font-size: 1.2rem;
+            }
+
+            .sidebar a:hover {
+                background-color: #495057;
+            }
+
+            .content {
+                margin-left: 260px;
+                margin-top: 80px;
+                padding: 20px;
+            }
+            .product-description {
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="/add-product"><i class="fas fa-plus"></i> Add Product</a>
+            <a href="/view"><i class="fas fa-box-open"></i> View Products</a>
+        </div>
+
+        <div class="header">
+            <h1>Shopping Admin Panel</h1>
+            <div class="user-actions">
+                <a href="/profile"><i class="fas fa-user-circle"></i> Profile</a>
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+
+        <div class="content">
+            
+
+            <div class="row">
+                <% const products = [ 
+                    { 
+                        title: "BAHUBALI",
+                        poster: "https://rukminim2.flixcart.com/image/850/1000/kzygpzk0/poster/r/q/s/large-movie-bahubali-2-posters-on-large-print-36x24-inches-original-imagbukjsjtksjsg.jpeg?q=20&crop=false",
+                        description: "Plot. Following the events of the first film, Stree leave Chanderi. Years later, Chanderi faces a new threat in the form of Sarkata, a headless ghost, who abducts women at night. The townspeople, unaware of this, mistakenly believe the missing women have left for better prospects."
+                    }, 
+                    { 
+                        title: "STREE 2",
+                        poster: "https://m.media-amazon.com/images/M/MV5BMTA1NmUxYzItZmVmNy00YmQxLTk4Y2UtZjVkMWUwMWQ5N2IxXkEyXkFqcGc@._V1_.jpg",
+                        description: "Plot. Following the events of the first film, Stree leave Chanderi. Years later, Chanderi faces a new threat in the form of Sarkata, a headless ghost, who abducts women at night. The townspeople, unaware of this, mistakenly believe the missing women have left for better prospects.."
+                    }, 
+                    { 
+                        title: "PATHAN",
+                        poster: "https://m.media-amazon.com/images/I/91uzbH0vmcL.jpg",
+                        description: "The first instalment in the universe to observe a crossover among characters and officially instate the universe as a brand, it follows an exiled RAW agent, who works with ISI agent Rubina Mohsin to take down Jim, a former RAW agent, who plans to attack India with a deadly lab-generated virus."
+                    },
+                    
+                ];
+                products.forEach(product => { %>
+                    <div class="col-md-3 mb-4">
+                        <div class="product-card">
+                            <img src="<%= product.poster %>" alt="<%= product.title %> Poster">
+                            <div class="product-title">
+                                <%= product.title %>
+                            </div>
+                            <div class="product-description">
+                                <%= product.description.substring(0, 50) %>...
+                                <a href="/product/<%= product.title %>">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+
+    </html>
