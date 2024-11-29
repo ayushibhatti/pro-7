@@ -34,7 +34,7 @@ routes.get('/product/Makeup%20Products',makeupProduct)
 routes.get('/add-product',addProduct)
 routes.post('/insertRecord', upload, addRecord);
 routes.get('/deleteRecord', deleteRecord);
-routes.get('/view', viewPage);
+routes.get('/view', passport.checkuser, viewPage);
 routes.get('/editRecord', editRecord);
 routes.post('/updateRecord', upload, updateRecord);
 
