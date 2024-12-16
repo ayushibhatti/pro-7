@@ -6,7 +6,7 @@ const app = express();
 
 app.set('view engine','ejs')
 
-const path = require('path'); 
+const path = require('path');
 
 const db = require('./config/db');
 

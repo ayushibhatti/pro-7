@@ -50,11 +50,11 @@
               <tbody>
                 <% subcatagory.map((val,i)=>{ %>
                   <tr>
-                      <th scope="row">
+                      <td scope="row">
                           <%= ++i %>
-                      </th>
+                      </td>
                       <td>
-                          <%= val?.catagoryId?.catagory_name %>
+                          <%= val.catagoryId.catagory_name %>
                       </td>
                       <td>
                           <%= val.subcatagory %>
@@ -62,16 +62,14 @@
                       <td>
                         <a href="/subcatagory/deletesubcatagory?id=<%= val.id  %>" class="btn btn-danger">Delete</a> 
                         <a href="/subcatagory/editsubcatagory?id=<%= val.id  %>" class="btn btn-warning">Edit</a>
-
                       </td>
                       <td>
-                        <a href="/subcategory/changeStatus?status=<%= val.status %>&id=<%= val.id %>"
-                            class="<% if(val.status == `active`) { %> btn
-                    btn-success <% } else { %> btn btn-danger <% } %>">
-                            <%= val.status %>
-                        </a>
-                    </td>
-                      
+                        <% if( val.status == "active") { %>
+                          <a href="/subcatagory/changesubstatus?id=<%= val.id %>&status=<%= val.status %>" class="btn btn-success"> <%= val.status %>  </a>
+                      <% } else { %>
+                        <a href="/subcatagory/changesubstatus?id=<%= val.id %>&status=<%= val.status %>" class="btn btn-warning"> <%= val.status %>  </a>
+                   <%   } %>
+                      </td>
                   </tr>
                   <% }) %>
                

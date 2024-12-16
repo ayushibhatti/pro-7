@@ -1,6 +1,7 @@
 const catagoryuser = require('../models/catagoryModal')
 const subcatagoryuser = require('../models/subcatagoryModal')
 
+
 const routes = require('../routes/subcatagoryRoute')
 
 const subCatagory = async (req , res) => {
@@ -81,18 +82,21 @@ const updatesubCatagory = async (req , res) => {
         return false;
     }
 }
-const changeStatus = async (req, res) => {
+
+const changesubStatus = async (req , res) => {
     try {
-        const status = req.query.status;
-        const id = req.query.id;
-        if (status == "active") {
-            await catagoryuser.findByIdAndUpdate(id, { status: "deactive" })
-            req.flash('success', "Status Successfully changed");
-            return res.redirect('/subcategory')
-        } else {
-            await catagoryuser.findByIdAndUpdate(id, { status: "active" })
-            req.flash('success', "Status Successfully changed");
-            return res.redirect('/subcategory')
+        let id = req.query.id;
+        let status = req.query.status;
+        if (status== "active") {
+            await catagoryuser.findByIdAndUpdate(id ,{
+                status : "deactive",
+            })
+            return res.redirect('/subcatagory')
+        }else{   
+            await catagoryuser.findByIdAndUpdate(id ,{
+                status : "active",
+            })
+            return res.redirect('/subcatagory')
         }
     } catch (err) {
         console.log(err);
@@ -101,5 +105,5 @@ const changeStatus = async (req, res) => {
 }
 
 module.exports = {
-    subCatagory , addsubCatagory ,insertsubCatagory , deletesubCatagory , editsubCatagory , updatesubCatagory ,changeStatus
+    subCatagory , addsubCatagory ,insertsubCatagory , deletesubCatagory , editsubCatagory , updatesubCatagory , changesubStatus
 }
